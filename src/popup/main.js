@@ -11,11 +11,12 @@ import {
   Tag,
   Row,
   Col,
+  Icon,
   message
 } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 
-const components = [Button, Tabs, Form, Input, Select, Cascader, Tag, Row, Col];
+const components = [Button, Tabs, Form, Input, Select, Cascader, Tag, Row, Col, Icon];
 
 components.forEach(item => {
   Vue.use(item);

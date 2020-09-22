@@ -1,20 +1,23 @@
 <template>
   <div class="second-panel">
-    <a-tabs default-active-key="1" size="small">
+    <a-tabs class="second-tab-box" default-active-key="1" size="small">
       <a-tab-pane key="1" tab="小报">
-        <WeeklyPaper></WeeklyPaper>
+        <WeeklyPaper :weeklyList="weeklyList"></WeeklyPaper>
       </a-tab-pane>
       <a-tab-pane key="2" tab="归档">
-        <TagCollection></TagCollection>
+        <TagCollection :tagList="tagList"></TagCollection>
       </a-tab-pane>
       <a-tab-pane key="3" tab="投稿">
-        <UploadForm></UploadForm>
+        <UploadForm :tagList="tagList"></UploadForm>
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 
 <script>
+import * as types from "@/store/action-types/popup";
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions } = createNamespacedHelpers("popup");
 import WeeklyPaper from "./WeeklyPaper";
 import UploadForm from "./UploadForm";
 import TagCollection from "./TagCollection";
@@ -24,28 +27,34 @@ export default {
     WeeklyPaper,
     UploadForm,
     TagCollection
+  },
+  computed: {
+    ...mapState({
+      tagList: state => state.tagList,
+      weeklyList: state => state.weeklyList
+    })
+  },
+  mounted() {
+    this.getTagList();
+    this.getWeeklyList();
+  },
+  methods: {
+    ...mapActions({
+      getTagList: types.SET_TAG_LIST,
+      getWeeklyList: types.SET_WEEKLY_LIST
+    })
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .second-panel {
-  box-sizing: border-box;
-  // padding: 0px 12px 0;
-  // height: 100%;
-  // border: 1px solid crimson;
-  // &::v-deep .ant-tabs {
-  //   height: 100%;
-  //   display: flex;
-  //   flex-direction: column;
-  //   &-bar {
-  //     flex: 0;
-  //   }
-  //   &-top-content {
-  //     flex: 1;
-  //     border: 1px solid blueviolet;
-  //     // overflow-y: scroll;
-  //   }
-  // }
+  .second-tab-box {
+    &::v-deep .ant-tabs-content {
+      > .ant-tabs-tabpane {
+        padding: 0 !important;
+      }
+    }
+  }
 }
 </style>

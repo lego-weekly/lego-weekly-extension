@@ -1,16 +1,14 @@
 <template>
   <section class="weekly-paper-wrap">
-    <a-row :gutter="12">
-      <a-col :span="8" v-for="item in weeklyList" :key="item.id">
+    <a-row type="flex" justify="space-between">
+      <a-col :span="7" v-for="item in weeklyList" :key="item.id">
         <div class="card">
           <div class="card-avatar">
-            <img
-              alt="example"
-              src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+            <img alt="example" :src="item.image"
             />
           </div>
           <div class="card-meta">
-            <span>{{ item.name }}</span>
+            <span>{{ `第 ${item.week} 期` }}</span>
           </div>
         </div>
       </a-col>
@@ -19,47 +17,45 @@
 </template>
 
 <script>
-// import * as types from "@/store/action-types";
 export default {
   name: "WeeklyPaper",
-  data() {
-    return {
-      weeklyList: [
-        { id: 42, name: "第8期" },
-        { id: 43, name: "第7期" },
-        { id: 16, name: "第6期" },
-        { id: 23, name: "第5期" },
-        { id: 32, name: "第4期" },
-        { id: 19, name: "第3期" },
-        { id: 40, name: "第2期" },
-        { id: 33, name: "第1期" }
-      ]
-    };
+  props: {
+    weeklyList: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
-  mounted() {
-    console.log(this.$store);
-    // this.$store.dispatch(types.SET_WEEKLY_LIST);
-  }
 };
 </script>
 
 <style lang="scss" scoped>
 .weekly-paper-wrap {
-  // height: 100%;
-  padding: 12px 0 0;
+  padding-top: 12px;
+  height: 420px;
+  overflow-y: auto;
   .card {
     margin-bottom: 10px;
+    // box-shadow: 0 2px 0 hsla(0,0%,67%,.1);
     cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #efefef;
     &-avatar {
-      // border: 1px solid red;
-      padding: 4px;
+      padding: 3px;
       box-sizing: border-box;
       img {
         width: 100%;
+        height: 62px;
       }
     }
     &-meta {
       text-align: center;
+      line-height: 22px;
+    }
+    &:hover{
+      box-shadow: 0 2px 0 rgba(171, 171, 171, 0.2);
     }
   }
 }

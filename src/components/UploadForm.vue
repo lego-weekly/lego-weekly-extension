@@ -57,6 +57,14 @@ import api from "@/api";
 
 export default {
   name: "UploadForm",
+  props: {
+    tagList: {
+      type: Array,
+      default () {
+        return []
+      }
+    }
+  },
   data() {
     return {
       labelCol: { span: 4 },
@@ -149,7 +157,7 @@ export default {
       );
     },
     async onSubmit() {
-      const articleData = {...this.formData, tag: this.formData.tag[1]}
+      const articleData = { ...this.formData, tag: this.formData.tag[1] };
       try {
         await api.addArticle(articleData);
         this.$message.success("投稿成功！");

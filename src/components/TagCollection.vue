@@ -1,28 +1,41 @@
 <template>
   <section class="tag-collection-wrap">
-    <a-tag :color="tag.bgColor" v-for="tag in tagList" :key="tag.id">{{
+    <a-tag class="tag-item" :color="tag.bgColor" v-for="tag in newTagList" :key="tag.id">
+      {{
       tag.name
-    }}</a-tag>
+      }}
+    </a-tag>
   </section>
 </template>
 
 <script>
-// import * as types from "@/store/action-types";
+import { CustomColor } from "@/constants/tag-color";
 export default {
   name: "TagCollection",
-  data() {
-    return {
-      tagList: [
-        { id: 13, name: "HTML", bgColor: "#f50" },
-        { id: 22, name: "CSS", bgColor: "#2db7f5" },
-        { id: 37, name: "JS", bgColor: "#87d068" },
-        { id: 43, name: "NodeJS", bgColor: "#108ee9" },
-        { id: 33, name: "微前端", bgColor: "#4d0" }
-      ]
-    };
+  props: {
+    tagList: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
-  mounted() {
-    // this.$store.dispatch(types.SET_TAG_LIST);
+  computed: {
+    newTagList() {
+      return this.initTagColor();
+    }
+  },
+  methods: {
+    initTagColor() {
+      const defaultColor = CustomColor;
+      return this.tagList.map(tag => {
+        const idx = parseInt(Math.random() * defaultColor.length);
+        return {
+          ...tag,
+          bgColor: defaultColor[idx]
+        };
+      });
+    }
   }
 };
 </script>
@@ -30,5 +43,9 @@ export default {
 <style lang="scss" scoped>
 .tag-collection-wrap {
   padding: 12px 0 0;
+  .tag-item {
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
 }
 </style>

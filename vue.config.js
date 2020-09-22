@@ -22,7 +22,7 @@ module.exports = {
     plugins: [
       new CopyWebpackPlugin({
         patterns: [
-          { from: path.resolve("src/crawl.js"), to: path.resolve("dist/js") }
+          { from: path.resolve("src/constants/crawl.js"), to: path.resolve("dist/js") }
         ]
       })
     ]
