@@ -2,7 +2,7 @@ import axios from "axios"; // 引入axios
 // import qs from "qs"; // 引入qs模块，用来序列化post类型的数据，后面会提到
 import config from "../config";
 import router from '../router'
-import { message } from 'ant-design-vue'
+import Vue from 'vue'
 
 // axios 配置
 axios.defaults.timeout = 5000; // 设置请求超时
@@ -29,12 +29,20 @@ axios.interceptors.response.use(
     if(error.response) {
       switch (error.response.status) {
         case 401:
-          message.error('登陆过期')
           window.localStorage.removeItem('token')
-          router.replace({
-            path: '/',
-            query: { redirect: router.currentRoute.fullPath } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+          Vue.prototype.$confirm({
+            content: '未登陆或登陆过期',
+            onOk() {
+              router.replace({
+                path: '/login',
+                query: { redirect: router.currentRoute.fullPath } // 将跳转的路由path作为参数，登录成功后跳转到该路由
+              })
+            },
+            okText: '前往登陆',
+            cancelText: '取消',
           })
+          
+          
       }
     }
     

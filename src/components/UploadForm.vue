@@ -52,13 +52,13 @@
 <script>
 import * as types from "@/store/action-types/popup";
 import { createNamespacedHelpers } from "vuex";
-const { mapState, mapActions } = createNamespacedHelpers("popup");
+const { mapActions } = createNamespacedHelpers("popup");
 import api from "@/api";
 
 export default {
   name: "UploadForm",
   props: {
-    tagList: {
+    selfTagList: {
       type: Array,
       default () {
         return []
@@ -79,12 +79,8 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      tagList: state => state.tagList,
-      userList: state => state.userList
-    }),
     tagOptions() {
-      return this.initTreeData(this.tagList);
+      return this.initTreeData(this.selfTagList);
     },
     canSubmit() {
       const {

@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <a-icon type="arrow-left" style="fontSize: 18px;cursor: pointer;" @click="$router.push('/')"></a-icon>
     <a-spin :spinning="loading">
       <a-icon slot="indicator" type="loading" style="font-size: 24px" spin />
       <h2 class="text-center">{{ login ? "前端小报系统" : "注册账号" }}</h2>
@@ -140,7 +141,7 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(sucMsg)
-              this.$router.push("/home");
+              this.$router.push("/");
             })
             .catch(() => {
               this.loading = false;

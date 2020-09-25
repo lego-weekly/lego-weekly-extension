@@ -5,10 +5,10 @@
         <WeeklyPaper :weeklyList="weeklyList"></WeeklyPaper>
       </a-tab-pane>
       <a-tab-pane key="2" tab="归档">
-        <TagCollection :tagList="tagList"></TagCollection>
+        <TagCollection :selfTagList="tagList"></TagCollection>
       </a-tab-pane>
       <a-tab-pane key="3" tab="投稿">
-        <UploadForm :tagList="tagList"></UploadForm>
+        <UploadForm :selfTagList="tagList"></UploadForm>
       </a-tab-pane>
     </a-tabs>
   </div>

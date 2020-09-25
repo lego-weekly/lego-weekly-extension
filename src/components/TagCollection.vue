@@ -13,7 +13,7 @@ import { CustomColor } from "@/constants/tag-color";
 export default {
   name: "TagCollection",
   props: {
-    tagList: {
+    selfTagList: {
       type: Array,
       default() {
         return [];
@@ -28,7 +28,7 @@ export default {
   methods: {
     initTagColor() {
       const defaultColor = CustomColor;
-      return this.tagList.map(tag => {
+      return this.selfTagList.map(tag => {
         const idx = parseInt(Math.random() * defaultColor.length);
         return {
           ...tag,
