@@ -6,8 +6,6 @@ import "ant-design-vue/dist/antd.css";
 import router from '../router'
 
 Vue.use(AntDesign)
-const { message } =  AntDesign
-Vue.prototype.$message = message;
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,17 +1,17 @@
 <template>
   <div class="upload-form-wrap">
     <a-form :model="formData" :label-col="labelCol" :wrapper-col="wrapperCol">
-      <a-form-item label="文章标题">
+      <a-form-item label="文章标题" required>
         <a-input v-model="formData.title" />
       </a-form-item>
-      <a-form-item label="推荐理由">
+      <a-form-item label="推荐理由" required>
         <a-textarea
           v-model="formData.description"
           placeholder="Basic usage"
           :rows="3"
         />
       </a-form-item>
-      <a-form-item label="投稿人">
+      <!-- <a-form-item label="投稿人" required>
         <a-row>
           <a-col :span="12">
             <a-select v-model="formData.user">
@@ -24,8 +24,8 @@
             </a-select>
           </a-col>
         </a-row>
-      </a-form-item>
-      <a-form-item label="设置分类">
+      </a-form-item> -->
+      <a-form-item label="设置分类" required>
         <a-row type="flex" justify="space-between">
           <a-col :span="12">
             <a-cascader
@@ -41,7 +41,7 @@
             />
           </a-col>
           <a-col>
-            <a-button type="primary" @click="onSubmit">投稿</a-button>
+            <a-button type="primary" :disabled="!canSubmit" @click="onSubmit">投稿</a-button>
           </a-col>
         </a-row>
       </a-form-item>
@@ -73,7 +73,7 @@ export default {
         title: "",
         description: "",
         link: "",
-        user: "",
+        // user: "",
         tag: []
       }
     };
@@ -85,6 +85,15 @@ export default {
     }),
     tagOptions() {
       return this.initTreeData(this.tagList);
+    },
+    canSubmit() {
+      const {
+        title,
+        description,
+        link,
+        tag,
+      } = this.formData
+      return title && description && link && tag.length
     }
   },
   mounted() {

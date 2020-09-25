@@ -6,10 +6,10 @@
       <a-form-model :model="form" :rules="rules" ref="form">
         <a-form-model-item
           v-if="!login"
-          prop="username"
+          prop="name"
           :rules="[{ required: true, message: '请输入用户名称' }]"
         >
-          <a-input v-model="form.username" placeholder="用于展示投稿人">
+          <a-input v-model="form.name" placeholder="用于展示投稿人">
             <a-icon slot="prefix" type="user" />
           </a-input>
         </a-form-model-item>
@@ -52,6 +52,7 @@
               type="primary"
               @click="handleConfirm"
               :disabled="disabled"
+              @keyup.enter.native="handleConfirm"
             >
               Log in
             </a-button>
@@ -64,6 +65,7 @@
               type="primary"
               @click="handleConfirm"
               :disabled="disabled"
+              @keyup.enter.native="handleConfirm"
             >
               Register
             </a-button>
@@ -86,14 +88,14 @@ export default {
   data() {
     return {
       form: {
-        username: "",
+        name: "",
         email: "",
         password: "",
         rePassword: "",
       },
       rules: {
         email: [{ validator: this.emailValidate }],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码"}],
       },
       login: true,
       pwdVisible: false,
@@ -125,22 +127,24 @@ export default {
             password: this.form.password,
           }
         : {
-            username: this.form.username,
+            name: this.form.name,
             email: this.form.email,
             password: this.form.password,
           };
+      const sucMsg = this.login ? '登陆成功' : '注册成功'
+      const errMsg = this.login ? '登陆失败' : '注册失败'
       this.$refs.form.validate((valid) => {
         if (valid) {
           this.loading = true;
           baseApi(params)
-            .then((res) => {
-              console.log(res);
+            .then(() => {
               this.loading = false;
+              this.$message.success(sucMsg)
               this.$router.push("/home");
             })
-            .catch((err) => {
+            .catch(() => {
               this.loading = false;
-              console.log(err);
+              this.$message.error(errMsg)
             });
         }
       });

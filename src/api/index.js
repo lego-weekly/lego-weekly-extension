@@ -2,13 +2,10 @@ import { genPostReq } from "./http";
 
 const loginApi = {
   login: (params) => {
-    // return Promise.resolve({
-    //   data: {
-    //     msg: 'success',
-    //     params,
-    //   }
-    // })
-    return genPostReq("/auth/login")(params)
+    return genPostReq("/auth/login")(params).then(res => {
+      window.localStorage.setItem("token", res.data.token);
+      return res
+    })
   },
   register: (params) => {
     return genPostReq("/auth/register")(params)
