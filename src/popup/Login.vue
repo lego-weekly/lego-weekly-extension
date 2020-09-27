@@ -81,7 +81,7 @@
 </template>
 
 <script>
-const EMAIL_REG = /^[a-zA-Z0-9]+@cloudglab.com$/;
+const EMAIL_REG = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/;
 import api from "@/api/index.js";
 
 export default {
@@ -154,7 +154,7 @@ export default {
       if (!value) {
         callback(new Error("请输入邮箱"));
       } else if (!EMAIL_REG.test(value)) {
-        callback(new Error("请输入cloudglab邮箱地址"));
+        callback(new Error("请输入订阅邮箱地址"));
       } else {
         callback();
       }
