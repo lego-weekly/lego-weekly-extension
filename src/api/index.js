@@ -1,16 +1,19 @@
 import { genPostReq } from "./http";
 
 const loginApi = {
-  login: (params) => {
+  login: params => {
     return genPostReq("/auth/login")(params).then(res => {
       window.localStorage.setItem("token", res.data.token);
-      return res
-    })
+      return res;
+    });
   },
-  register: (params) => {
-    return genPostReq("/auth/register")(params)
+  register: params => {
+    return genPostReq("/auth/register")(params);
   },
-}
+  validate: params => {
+    return genPostReq("/auth/validate")(params);
+  }
+};
 
 const mainAPI = {
   getWeeklyList: genPostReq("/weeks/list"),

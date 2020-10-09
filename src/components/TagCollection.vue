@@ -1,9 +1,12 @@
 <template>
   <section class="tag-collection-wrap">
-    <a-tag class="tag-item" :color="tag.bgColor" v-for="tag in newTagList" :key="tag.id">
-      {{
-      tag.name
-      }}
+    <a-tag
+      class="tag-item"
+      :color="tag.bgColor"
+      v-for="tag in newTagList"
+      :key="tag.id"
+    >
+      {{ tag.name }}
     </a-tag>
   </section>
 </template>

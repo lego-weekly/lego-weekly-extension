@@ -1,11 +1,10 @@
 <template>
   <section class="weekly-paper-wrap">
-    <a-row type="flex" justify="space-between">
-      <a-col :span="7" v-for="item in weeklyList" :key="item.id">
+    <a-row :gutter="16">
+      <a-col :span="8" v-for="item in weeklyList" :key="item.id">
         <div class="card">
           <div class="card-avatar">
-            <img alt="example" :src="item.image"
-            />
+            <img alt="example" :src="item.image" />
           </div>
           <div class="card-meta">
             <span>{{ `第 ${item.week} 期` }}</span>
@@ -26,7 +25,7 @@ export default {
         return [];
       }
     }
-  },
+  }
 };
 </script>
 
@@ -54,7 +53,7 @@ export default {
       text-align: center;
       line-height: 22px;
     }
-    &:hover{
+    &:hover {
       box-shadow: 0 2px 0 rgba(171, 171, 171, 0.2);
     }
   }

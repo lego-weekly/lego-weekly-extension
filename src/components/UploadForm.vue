@@ -11,20 +11,13 @@
           :rows="3"
         />
       </a-form-item>
-      <!-- <a-form-item label="投稿人" required>
+      <a-form-item label="投稿人" required>
         <a-row>
           <a-col :span="12">
-            <a-select v-model="formData.user">
-              <a-select-option
-                v-for="user in userList"
-                :key="user.id"
-                :value="user.id"
-                >{{ user.name }}</a-select-option
-              >
-            </a-select>
+            <span class="username">{{ user.name }}</span>
           </a-col>
         </a-row>
-      </a-form-item> -->
+      </a-form-item>
       <a-form-item label="设置分类" required>
         <a-row type="flex" justify="space-between">
           <a-col :span="12">
@@ -41,7 +34,9 @@
             />
           </a-col>
           <a-col>
-            <a-button type="primary" :disabled="!canSubmit" @click="onSubmit">投稿</a-button>
+            <a-button type="primary" :disabled="!canSubmit" @click="onSubmit"
+              >投稿</a-button
+            >
           </a-col>
         </a-row>
       </a-form-item>
@@ -58,10 +53,16 @@ import api from "@/api";
 export default {
   name: "UploadForm",
   props: {
+    user: {
+      type: Object,
+      default() {
+        return {};
+      }
+    },
     selfTagList: {
       type: Array,
-      default () {
-        return []
+      default() {
+        return [];
       }
     }
   },
@@ -73,7 +74,6 @@ export default {
         title: "",
         description: "",
         link: "",
-        // user: "",
         tag: []
       }
     };
@@ -83,19 +83,15 @@ export default {
       return this.initTreeData(this.selfTagList);
     },
     canSubmit() {
-      const {
-        title,
-        description,
-        link,
-        tag,
-      } = this.formData
-      return title && description && link && tag.length
+      const { title, description, link, tag } = this.formData;
+      return title && description && link && tag.length;
     }
   },
   mounted() {
     this.autoFetch();
     this.getTagList();
     this.getUserList();
+    console.log("user", this.user);
   },
   methods: {
     ...mapActions({
@@ -181,6 +177,9 @@ export default {
   // box-sizing: border-box;
   &::v-deep .ant-form-item {
     margin-bottom: 14px;
+  }
+  .username {
+    margin-left: 5px;
   }
 }
 </style>

@@ -4,7 +4,8 @@ import api from "@/api";
 const state = {
   userList: [],
   tagList: [],
-  weeklyList: []
+  weeklyList: [],
+  user: null
 };
 const mutations = {
   [types.SET_USER_LIST](state, payload) {
@@ -16,6 +17,9 @@ const mutations = {
   },
   [types.SET_WEEKLY_LIST](state, payload) {
     state.weeklyList = [...payload];
+  },
+  [types.VALIDATE](state, payload) {
+    state.user = payload;
   }
 };
 const actions = {
@@ -30,6 +34,14 @@ const actions = {
   async [types.SET_WEEKLY_LIST]({ commit }, payload) {
     const weeklyList = await api.getWeeklyList(payload);
     commit(types.SET_WEEKLY_LIST, weeklyList);
+  },
+  async [types.VALIDATE]({ commit }, payload) {
+    try {
+      const user = await api.validate(payload);
+      commit(types.VALIDATE, user);
+    } catch (error) {
+      console.error(error);
+    }
   }
 };
 const getters = {};

@@ -1,17 +1,18 @@
 <template>
-<div class="fe-weekly-popup">
-  <router-view />
-</div>
+  <div class="fe-weekly-popup">
+    <router-view />
+  </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-}
+  name: "App"
+};
 </script>
 <style lang="scss">
-@import '@/styles/index.scss';
-html, body{
+@import "@/styles/index.scss";
+html,
+body {
   height: auto !important;
 }
 .fe-weekly-popup {

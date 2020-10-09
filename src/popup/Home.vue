@@ -2,28 +2,26 @@
   <div class="home">
     <a-tabs class="popup-tab-box" type="card" default-active-key="2">
       <a-tab-pane key="1">
-        <span slot="tab">
-          <a-icon type="fire" />常用推荐
-        </span>
-        Content of Tab Pane 1
+        <span slot="tab"> <a-icon type="fire" />常用推荐 </span>
+        <div class="no-data-tab">
+          <a-alert message="暂未开发，敬请期待！" type="info" show-icon />
+        </div>
       </a-tab-pane>
       <a-tab-pane key="2">
-        <span slot="tab">
-          <a-icon type="bank" />前端学院
-        </span>
+        <span slot="tab"> <a-icon type="bank" />前端学院 </span>
         <SecondPanel></SecondPanel>
       </a-tab-pane>
       <a-tab-pane key="3">
-        <span slot="tab">
-          <a-icon type="book" />前端文档
-        </span>
-        Content of Tab Pane 3
+        <span slot="tab"> <a-icon type="book" />前端文档 </span>
+        <div class="no-data-tab">
+          <a-alert message="暂未开发，敬请期待！" type="info" show-icon />
+        </div>
       </a-tab-pane>
     </a-tabs>
   </div>
 </template>
 <script>
-import SecondPanel from "@/components/SecondPanel";
+import SecondPanel from "@/components/SecondPanel.vue";
 import axios from "axios";
 export default {
   name: "App",
@@ -72,6 +70,9 @@ export default {
         background: #fff;
       }
     }
+  }
+  .no-data-tab {
+    padding: 10px 0;
   }
 }
 </style>

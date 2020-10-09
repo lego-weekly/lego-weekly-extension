@@ -8,7 +8,12 @@
         <TagCollection :selfTagList="tagList"></TagCollection>
       </a-tab-pane>
       <a-tab-pane key="3" tab="投稿">
-        <UploadForm :selfTagList="tagList"></UploadForm>
+        <UploadForm
+          v-if="user"
+          :user="user"
+          :selfTagList="tagList"
+        ></UploadForm>
+        <NotLogin v-else />
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -21,25 +26,31 @@ const { mapState, mapActions } = createNamespacedHelpers("popup");
 import WeeklyPaper from "./WeeklyPaper";
 import UploadForm from "./UploadForm";
 import TagCollection from "./TagCollection";
+import NotLogin from "./NotLogin";
+
 export default {
   name: "SecondPanel",
   components: {
     WeeklyPaper,
     UploadForm,
-    TagCollection
+    TagCollection,
+    NotLogin
   },
   computed: {
     ...mapState({
       tagList: state => state.tagList,
-      weeklyList: state => state.weeklyList
+      weeklyList: state => state.weeklyList,
+      user: state => state.user
     })
   },
   mounted() {
     this.getTagList();
     this.getWeeklyList();
+    this.validate();
   },
   methods: {
     ...mapActions({
+      validate: types.VALIDATE,
       getTagList: types.SET_TAG_LIST,
       getWeeklyList: types.SET_WEEKLY_LIST
     })
