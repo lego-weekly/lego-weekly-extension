@@ -118,9 +118,14 @@ export default {
             .then(() => {
               this.loading = false;
               this.$message.success(
-                `${this.isLogin ? "登录成功" : "注册成功, 将跳转登录"}`
+                `${this.isLogin ? "登录成功" : "注册成功, 请登录"}`
               );
-              this.$router.push(`${this.isLogin ? "/" : "/login"}`);
+              if (this.isLogin) {
+                this.$router.push('/')
+              } else {
+                this.viewChange()
+              }
+              // this.$router.push(this.isLogin ? "/" : {name: 'Sign', params: {type: 'login'}})
             })
             .catch(error => {
               console.error(error);

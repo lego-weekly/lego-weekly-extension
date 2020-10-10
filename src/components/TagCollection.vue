@@ -6,13 +6,15 @@
       v-for="tag in newTagList"
       :key="tag.id"
     >
-      {{ tag.name }}
+      <a :href="`${baseHost}/detail/${tag.name}`" target="_black">{{ tag.name }}</a>
     </a-tag>
   </section>
 </template>
 
 <script>
 import { CustomColor } from "@/constants/tag-color";
+import config from "@/config";
+
 export default {
   name: "TagCollection",
   props: {
@@ -21,6 +23,11 @@ export default {
       default() {
         return [];
       }
+    }
+  },
+  data () {
+    return {
+      baseHost: config.baseHOST
     }
   },
   computed: {

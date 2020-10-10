@@ -1,3 +1,7 @@
+const url = [
+  'http://localhost:6699',
+  'http://www.yangjay.xyz'
+]
 export default {
-  baseURL: "http://localhost:6699/api"
+  baseHOST: url[1]
 };
