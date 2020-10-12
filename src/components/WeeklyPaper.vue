@@ -33,10 +33,10 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       baseHost: config.baseHOST
-    }
+    };
   }
 };
 </script>

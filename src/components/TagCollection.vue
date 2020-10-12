@@ -6,7 +6,9 @@
       v-for="tag in newTagList"
       :key="tag.id"
     >
-      <a :href="`${baseHost}/detail/${tag.name}`" target="_black">{{ tag.name }}</a>
+      <a :href="`${baseHost}/detail/${tag.name}`" target="_black">{{
+        tag.name
+      }}</a>
     </a-tag>
   </section>
 </template>
@@ -25,10 +27,10 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       baseHost: config.baseHOST
-    }
+    };
   },
   computed: {
     newTagList() {

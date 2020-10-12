@@ -1,4 +1,4 @@
-let doc = document;
+var doc = document;
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.message === "GET_TOPIC_INFO") {

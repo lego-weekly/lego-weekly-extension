@@ -121,9 +121,9 @@ export default {
                 `${this.isLogin ? "登录成功" : "注册成功, 请登录"}`
               );
               if (this.isLogin) {
-                this.$router.push('/')
+                this.$router.push("/");
               } else {
-                this.viewChange()
+                this.viewChange();
               }
               // this.$router.push(this.isLogin ? "/" : {name: 'Sign', params: {type: 'login'}})
             })

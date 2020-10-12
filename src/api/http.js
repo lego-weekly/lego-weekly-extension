@@ -6,7 +6,7 @@ import Vue from "vue";
 
 // axios 配置
 axios.defaults.timeout = 5000; // 设置请求超时
-axios.defaults.baseURL = config.baseHOST + '/api'; // 默认请求地址
+axios.defaults.baseURL = config.baseHOST + "/api"; // 默认请求地址
 
 axios.interceptors.request.use(
   config => {

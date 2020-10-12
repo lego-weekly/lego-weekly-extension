@@ -30,6 +30,7 @@
               }"
               :options="tagOptions"
               :display-render="displayRender"
+              expand-trigger="hover"
               change-on-select
             />
           </a-col>
@@ -136,20 +137,31 @@ export default {
             {
               file: "./js/crawl.js"
             },
-            function() {
+            function(_) {
               // 向目标网页进行通信，向 crawl.js 发送一个消息
               // eslint-disable-next-line no-undef
+              let e = chrome.runtime.lastError;
+              if (e !== undefined) {
+                console.log(tabId, _, e);
+              }
               chrome.tabs.sendMessage(
                 tabId,
                 {
                   message: "GET_TOPIC_INFO"
                 },
                 function(response) {
-                  if (!response) return false;
-                  // 获取到返回的文章 title 、url、description
-                  host.formData.title = response.title;
-                  host.formData.link = response.link;
-                  host.formData.description = response.description;
+                  if (!window.chrome.runtime.lastError) {
+                    if (!response) return false;
+                    // 获取到返回的文章 title 、url、description
+                    host.formData.title = response.title;
+                    host.formData.link = response.link;
+                    host.formData.description = response.description;
+                  }
+                  // if (!response) return false;
+                  // // 获取到返回的文章 title 、url、description
+                  // host.formData.title = response.title;
+                  // host.formData.link = response.link;
+                  // host.formData.description = response.description;
                 }
               );
             }
