@@ -31,7 +31,6 @@
               :options="tagOptions"
               :display-render="displayRender"
               expand-trigger="hover"
-              change-on-select
             />
           </a-col>
           <a-col>
